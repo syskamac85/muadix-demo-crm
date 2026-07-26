@@ -1,0 +1,23 @@
+# ========================================================================
+# ZMIENNE ŚRODOWISKOWE DLA RENDER – skopiuj do panelu Render
+# ========================================================================
+# Po utworzeniu serwisu webowego na Render, dodaj te zmienne w zakładce
+# "Environment". Wartości oznaczone jako "sync: false" w render-blueprint.yaml
+# musisz dodać ręcznie.
+# ========================================================================
+
+# 1. DATABASE_URL (Supabase PostgreSQL – darmowy)
+DATABASE_URL=postgresql://postgres.kjjkrlnrlcqfdsvezkjd:wJVp6GhKYAJHexRq@aws-1-eu-west-1.pooler.supabase.com:5432/postgres?sslmode=require
+
+# 2. CELERY_BROKER_URL (Upstash Redis – darmowy)
+CELERY_BROKER_URL=rediss://default:AbvwAAIncDJiY2Q3MDU1N2UzYjY0YmMxYThlODEyMTVlY2JiMjkyNHAyNDgxMTI@proper-mite-48112.upstash.io:6379/0?ssl_cert_reqs=none
+
+# 3. CELERY_RESULT_BACKEND (jw.)
+CELERY_RESULT_BACKEND=rediss://default:AbvwAAIncDJiY2Q3MDU1N2UzYjY0YmMxYThlODEyMTVlY2JiMjkyNHAyNDgxMTI@proper-mite-48112.upstash.io:6379/0?ssl_cert_reqs=none
+
+# 4. CHANNEL_REDIS_URL (jw. – dla Django Channels WebSocket)
+CHANNEL_REDIS_URL=rediss://default:AbvwAAIncDJiY2Q3MDU1N2UzYjY0YmMxYThlODEyMTVlY2JiMjkyNHAyNDgxMTI@proper-mite-48112.upstash.io:6379/0?ssl_cert_reqs=none
+
+# ========================================================================
+# POZOSTAŁE ZMIENNE (Render wygeneruje SECRET_KEY automatycznie)
+# ========================================================================

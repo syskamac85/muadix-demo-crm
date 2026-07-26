@@ -18,6 +18,11 @@ apps/web/.next/
 apps/api/celery.log
 .DS_Store
 
+# Env/config overrides
+.env
+apps/web/.env*
+apps/api/.env*
+
 
 
 # Python caches
