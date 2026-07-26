@@ -14,6 +14,7 @@ export default function Home() {
   const hydrated = useAuthStore((state) => state.hydrated);
   const token = useAuthStore((state) => state.token);
   const [error, setError] = useState<string | null>(null);
+  const [retrying, setRetrying] = useState(false);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -24,31 +25,52 @@ export default function Home() {
     }
 
     let cancelled = false;
+    let attempt = 0;
 
-    (async () => {
+    const fetchDemoToken = async (): Promise<Response> => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 30000);
       try {
-        const res = await fetch(`${API_BASE_URL}/api/auth/demo-token/`, {
+        return await fetch(`${API_BASE_URL}/api/auth/demo-token/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          signal: controller.signal,
         });
+      } finally {
+        clearTimeout(timeout);
+      }
+    };
 
-        if (!res.ok) {
-          const payload = await res.json().catch(() => null);
-          throw new Error(payload?.detail ?? "Nie udało się pobrać tokenu demo.");
+    (async () => {
+      while (attempt < 3 && !cancelled) {
+        attempt++;
+        try {
+          setRetrying(attempt > 1);
+          const res = await fetchDemoToken();
+
+          if (!res.ok) {
+            const payload = await res.json().catch(() => null);
+            throw new Error(payload?.detail ?? "Nie udało się pobrać tokenu demo.");
+          }
+
+          const payload = (await res.json()) as {
+            access: string;
+            refresh: string;
+          };
+
+          if (cancelled) return;
+
+          setAuth({ token: payload.access, refresh: payload.refresh });
+          router.push("/dashboard");
+          return;
+        } catch (err) {
+          if (cancelled) return;
+          if (attempt < 3) {
+            await new Promise((r) => setTimeout(r, 3000));
+            continue;
+          }
+          setError(err instanceof Error ? err.message : "Nieznany błąd.");
         }
-
-        const payload = (await res.json()) as {
-          access: string;
-          refresh: string;
-        };
-
-        if (cancelled) return;
-
-        setAuth({ token: payload.access, refresh: payload.refresh });
-        router.push("/dashboard");
-      } catch (err) {
-        if (cancelled) return;
-        setError(err instanceof Error ? err.message : "Nieznany błąd.");
       }
     })();
 
@@ -72,7 +94,9 @@ export default function Home() {
             </a>
           </div>
         ) : (
-          <p className="text-sm text-slate-600">Logowanie jako administrator…</p>
+          <p className="text-sm text-slate-600">
+            {retrying ? "Łączenie z serwerem (ponowna próba)…" : "Logowanie jako administrator…"}
+          </p>
         )}
       </div>
     </main>

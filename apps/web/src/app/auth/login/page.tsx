@@ -98,6 +98,12 @@ export default function LoginPage() {
         {error && (
           <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>
         )}
+
+        <div className="rounded-2xl bg-blue-50 px-4 py-3 text-sm text-blue-700">
+          <p className="font-semibold">Dane demo:</p>
+          <p>Użytkownik: <span className="font-mono">admin</span></p>
+          <p>Hasło: <span className="font-mono">demo1234</span></p>
+        </div>
       </div>
     </main>
   );
