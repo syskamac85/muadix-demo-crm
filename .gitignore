@@ -1,0 +1,25 @@
+.venv/
+crm.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.xlsx
+__pycache__/
+
+# Node / Next.js artifacts
+node_modules/
+.next/
+.turbo/
+.vercel/
+apps/web/.next/
+
+# Logs & local files
+*.log
+apps/api/celery.log
+.DS_Store
+
+
+
+# Python caches
+*.pyc
+**/__pycache__/
