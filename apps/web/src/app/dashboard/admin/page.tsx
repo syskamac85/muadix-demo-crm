@@ -110,7 +110,7 @@ const TENANTS_ENDPOINT = `${API_BASE_URL}/api/accounts/tenants/`;
 const BACKUPS_ENDPOINT = `${API_BASE_URL}/api/backups/`;
 
 const DEFAULT_TENANT_ID = 1;
-const DEFAULT_TENANT_NAME = "4 SUN CRM";
+const DEFAULT_TENANT_NAME = "Demo";
 const DEFAULT_TENANT: TenantOption = {
   id: DEFAULT_TENANT_ID,
   name: DEFAULT_TENANT_NAME,

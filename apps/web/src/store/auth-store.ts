@@ -31,7 +31,7 @@ export const useAuthStore = create<AuthState>()(
         }),
     }),
     {
-      name: "sun-crm-auth",
+      name: "crm-auth",
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         state?.setHydrated();

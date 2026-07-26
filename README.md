@@ -1,4 +1,4 @@
-# SUN CRM – środowisko developerskie
+# CRM – środowisko developerskie
 
 Poniżej znajdują się aktualne instrukcje uruchamiania całego stosu (backend Django + Celery + frontend Next.js) w środowisku lokalnym.
 
@@ -118,7 +118,7 @@ git remote set-url origin https://<username>:<token>@github.com/<username>/<repo
 
 **SSH:**
 ```bash
-git remote set-url origin git@github.com:syskamac85/4-SUN-CRM.git
+git remote set-url origin git@github.com:syskamac85/muadix-demo-crm.git
 git push
 ```
 

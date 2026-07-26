@@ -22,7 +22,7 @@ MAPBOX_ACCESS_TOKEN = os.getenv('MAPBOX_ACCESS_TOKEN')
 if MAPBOX_ACCESS_TOKEN:
     _geolocator = MapBox(api_key=MAPBOX_ACCESS_TOKEN, timeout=10)
 else:
-    _geolocator = Nominatim(user_agent="sun_crm_django_app")
+    _geolocator = Nominatim(user_agent="crm_django_app")
 
 geocode_fn = RateLimiter(
     _geolocator.geocode,

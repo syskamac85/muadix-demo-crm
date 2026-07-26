@@ -60,7 +60,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-6">
       <div className="glass-card w-full max-w-md space-y-4 p-8 text-center">
-        <h1 className="text-2xl font-semibold text-slate-900">SUN CRM Demo</h1>
+        <h1 className="text-2xl font-semibold text-slate-900">CRM Demo</h1>
         {error ? (
           <div className="space-y-4">
             <p className="text-sm text-red-600">{error}</p>

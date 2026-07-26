@@ -1,4 +1,4 @@
-# Fly.io configuration for the SUN CRM demo backend
+# Fly.io configuration for the CRM demo backend
 app = "muadix-demo-crm-api"
 primary_region = "waw"
 

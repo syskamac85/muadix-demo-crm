@@ -1,4 +1,4 @@
-# Deploying the SUN CRM backend on Render (Supabase + Upstash)
+# Deploying the CRM backend on Render (Supabase + Upstash)
 
 This guide describes how to run the Django/Channels API plus Celery worker on [Render](https://render.com) while using [Supabase](https://supabase.com) for PostgreSQL and [Upstash](https://upstash.com) for Redis (broker + Channels layer).
 
@@ -24,7 +24,7 @@ Keep all three resources in the same geographic region (e.g. `eu-central`) to av
 4. From your local machine, run the migrations against Supabase once:
    ```bash
    export DATABASE_URL="postgresql://postgres:<PASSWORD>@db.<ref>.supabase.co:5432/postgres?sslmode=require"
-   cd /path/to/4_SUN_CRM\ (web)
+   cd /path/to/crm-demo
    source .venv/bin/activate
    python apps/api/manage.py migrate
    ```
@@ -51,9 +51,9 @@ Prepare the following secrets before creating Render services:
 | `DJANGO_SETTINGS_MODULE` | Django settings module | `api.settings` |
 | `SECRET_KEY` | Django secret key | Use `python -c "import secrets; print(secrets.token_urlsafe(50))"` |
 | `DEBUG` | Disable in production | `False` |
-| `ALLOWED_HOSTS` | Comma-separated hosts for Django | `sun-crm-api.onrender.com` |
-| `CORS_ALLOWED_ORIGINS` | Frontend origins allowed | `https://4-sun-crm.vercel.app` |
-| `CSRF_TRUSTED_ORIGINS` | Must include HTTPS frontend(s) | `https://4-sun-crm.vercel.app` |
+| `ALLOWED_HOSTS` | Comma-separated hosts for Django | `muadix-demo-crm.onrender.com` |
+| `CORS_ALLOWED_ORIGINS` | Frontend origins allowed | `https://muadix-demo-crm.vercel.app` |
+| `CSRF_TRUSTED_ORIGINS` | Must include HTTPS frontend(s) | `https://muadix-demo-crm.vercel.app` |
 | `DATABASE_URL` | Supabase Postgres URI (with `sslmode=require`) | `postgresql://…` |
 | `CELERY_BROKER_URL` | Upstash Redis URL (TLS) | `rediss://default:…@…:6379` |
 | `CELERY_RESULT_BACKEND` | Same as broker | `rediss://default:…` |
@@ -68,8 +68,8 @@ Prepare the following secrets before creating Render services:
 
 This repo ships with a `render.yaml` blueprint describing two services:
 
-- **`sun-crm-api`** – Web service running Daphne (`api.asgi`).
-- **`sun-crm-celery`** – Worker service running `celery -A api worker -l info`.
+- **`muadix-demo-crm-api`** – Web service running Gunicorn (`api.wsgi`).
+- **`muadix-demo-crm-celery`** – Worker service running `celery -A api worker -l info`.
 
 To deploy:
 

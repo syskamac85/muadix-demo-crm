@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -551,7 +550,7 @@ export default function DashboardPage() {
           </button>
         </div>
         <header>
-          <Image src="/logo.jpg" alt="Sun CRM" width={120} height={40} priority className="h-10 w-auto" />
+          <h1 className="text-lg font-semibold text-slate-900">CRM</h1>
         </header>
 
         <section className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-flow-col md:auto-cols-[220px] md:overflow-visible md:snap-none">

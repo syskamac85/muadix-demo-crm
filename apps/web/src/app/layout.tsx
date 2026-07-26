@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SUN CRM • Panel terenowy",
+  title: "CRM • Panel terenowy",
   description:
     "Planowanie tras handlowców, komentarze live i baza do dzwonienia w jednym miejscu.",
 };

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -59,16 +58,6 @@ export default function LoginPage() {
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-6">
       <div className="glass-card w-full max-w-md space-y-6 p-8">
         <div className="space-y-2 text-center">
-          <div className="flex flex-col items-center gap-2">
-            <Image
-              src="/logo.jpg"
-              alt="Sun CRM"
-              width={140}
-              height={48}
-              priority
-              className="h-12 w-auto"
-            />
-          </div>
           <h1 className="text-2xl font-semibold text-slate-900">Panel logowania</h1>
         </div>
 
