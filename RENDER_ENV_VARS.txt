@@ -7,7 +7,7 @@
 # ========================================================================
 
 # 1. DATABASE_URL (Supabase PostgreSQL – darmowy)
-DATABASE_URL=postgresql://postgres.kjjkrlnrlcqfdsvezkjd:wJVp6GhKYAJHexRq@aws-1-eu-west-1.pooler.supabase.com:5432/postgres?sslmode=require
+DATABASE_URL=postgresql://postgres:EDr2W3fuMgr9Iy7X@db.vnsxdlzordpyjehbcrvu.supabase.co:5432/postgres?sslmode=require
 
 # 2. CELERY_BROKER_URL (Upstash Redis – darmowy)
 CELERY_BROKER_URL=rediss://default:AbvwAAIncDJiY2Q3MDU1N2UzYjY0YmMxYThlODEyMTVlY2JiMjkyNHAyNDgxMTI@proper-mite-48112.upstash.io:6379/0?ssl_cert_reqs=none
