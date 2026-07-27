@@ -15,20 +15,22 @@ class Migration(migrations.Migration):
             name='callrecord',
             options={'ordering': ('-contact_date', '-contact_time')},
         ),
-        migrations.RenameIndex(
-            model_name='task',
-            new_name='core_task_tenant__61bf4e_idx',
-            old_name='core_task_assignee_status',
-        ),
-        migrations.RenameIndex(
-            model_name='task',
-            new_name='core_task_tenant__9305a8_idx',
-            old_name='core_task_tenant_client',
-        ),
-        migrations.RenameIndex(
-            model_name='task',
-            new_name='core_task_tenant__6902a5_idx',
-            old_name='core_task_due_date',
+        migrations.RunSQL(
+            sql="""
+            DO $$
+            BEGIN
+                IF EXISTS (SELECT 1 FROM pg_class WHERE relname = 'core_task_assignee_status') THEN
+                    ALTER INDEX core_task_assignee_status RENAME TO core_task_tenant__61bf4e_idx;
+                END IF;
+                IF EXISTS (SELECT 1 FROM pg_class WHERE relname = 'core_task_tenant_client') THEN
+                    ALTER INDEX core_task_tenant_client RENAME TO core_task_tenant__9305a8_idx;
+                END IF;
+                IF EXISTS (SELECT 1 FROM pg_class WHERE relname = 'core_task_due_date') THEN
+                    ALTER INDEX core_task_due_date RENAME TO core_task_tenant__6902a5_idx;
+                END IF;
+            END$$;
+            """,
+            reverse_sql="",
         ),
         migrations.AddField(
             model_name='callrecord',
