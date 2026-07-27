@@ -35,6 +35,22 @@ class Migration(migrations.Migration):
                 'ordering': ('-created_at',),
             },
         ),
+        migrations.CreateModel(
+            name='TaskMessage',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('body', models.TextField()),
+                ('is_completion', models.BooleanField(default=False)),
+                ('is_manager_reply', models.BooleanField(default=False)),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='task_messages', to=settings.AUTH_USER_MODEL)),
+                ('task', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages', to='core.task')),
+            ],
+            options={
+                'ordering': ('created_at',),
+            },
+        ),
         migrations.RunSQL(
             sql="""
             DO $$
@@ -58,22 +74,6 @@ class Migration(migrations.Migration):
                 END IF;
             END$$;
             """,
-        ),
-        migrations.CreateModel(
-            name='TaskMessage',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('body', models.TextField()),
-                ('is_completion', models.BooleanField(default=False)),
-                ('is_manager_reply', models.BooleanField(default=False)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='task_messages', to=settings.AUTH_USER_MODEL)),
-                ('task', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages', to='core.task')),
-            ],
-            options={
-                'ordering': ('created_at',),
-            },
         ),
         migrations.AddIndex(
             model_name='task',
