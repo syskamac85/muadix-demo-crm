@@ -37,14 +37,4 @@ class Migration(migrations.Migration):
             name='contact_time',
             field=models.TimeField(default=django.utils.timezone.now),
         ),
-        migrations.AddField(
-            model_name='taskmessage',
-            name='due_date_update',
-            field=models.DateField(blank=True, null=True),
-        ),
-        migrations.AddField(
-            model_name='taskmessage',
-            name='status_snapshot',
-            field=models.CharField(blank=True, max_length=32),
-        ),
     ]
