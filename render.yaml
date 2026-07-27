@@ -13,7 +13,7 @@ services:
       python manage.py migrate --noinput &&
       python manage.py setup_demo
     startCommand: >-
-      cd apps/api && python manage.py setup_demo --reset && gunicorn api.wsgi:application --bind 0.0.0.0:$PORT
+      cd apps/api && python manage.py setup_demo --reset && daphne -b 0.0.0.0 -p $PORT api.asgi:application
     envVars:
       - fromGroup: muadix-demo-crm-backend
 
